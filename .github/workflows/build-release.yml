@@ -1,0 +1,37 @@
+name: Build and upload artifacts on tag create
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kernel source
+      uses: actions/checkout@v2
+
+    - name: Checkout zipper
+      uses: actions/checkout@v2
+      with:
+        repository: wolverine998/AnyKernel3
+        path: zipper
+
+    - name: Android kernel build
+      uses: lemniskett/android-kernel-actions@master
+      id: build
+      env:
+        NAME: xiaomi-kernel
+      with:
+        arch: arm64
+        compiler: aosp-clang/master/clang-r433403
+        defconfig: joyeuse-cust_defconfig
+        image: Image.gz-dtb
+
+    - name: Release build
+      uses: ncipollo/release-action@v1.8.9
+      with:
+        name: "Xiaomi Kernel Joyeuse"
+        artifacts: ${{ steps.<step id>.outputs.outfile }}
+        token: ${{ secrets.GITHUB_TOKEN }}
