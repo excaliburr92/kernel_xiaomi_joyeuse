@@ -1,8 +1,9 @@
-name: Build on push master
+name: Build and upload artifacts on tag create
 
 on:
   push:
-    branches: [ main ]
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -25,12 +26,14 @@ jobs:
       with:
         arch: arm64
         compiler: aosp-clang/master/clang-r433403
-        defconfig: joyeuse_defconfig
+        defconfig: joyeuse-cust_defconfig
         image: Image.gz-dtb
-    - name: Create Release
+
+    - name: Release build
       uses: ncipollo/release-action@v1.8.9
-      with:
-        artifacts: "zipper/*"
-        name: "Xiaomi Kernel **Joyeuse**"
-        tag: v4.14
-        token: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    name: Xiaomi Kernel Joyeuse
+    artifacts: ${{ steps.<step id>.outputs.outfile }}
+    token: ${{ secrets.GITHUB_TOKEN }}
+
+
