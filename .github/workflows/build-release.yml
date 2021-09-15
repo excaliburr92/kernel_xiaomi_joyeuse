@@ -26,7 +26,7 @@ jobs:
       with:
         arch: arm64
         compiler: aosp-clang/master/clang-r433403
-        defconfig: joyeuse-cust_defconfig
+        defconfig: joyeuse_defconfig
         image: Image.gz-dtb
 
     - name: Release build
