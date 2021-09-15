@@ -32,6 +32,7 @@ jobs:
     - name: Release build
       uses: ncipollo/release-action@v1.8.9
       with:
-        name: "Xiaomi Kernel Joyeuse"
+        name: Kernel for Redmi Note 9 Pro
+        allowUpdates: true
         artifacts: ${{ steps.build.outputs.outfile }}
         token: ${{ secrets.GITHUB_TOKEN }}
