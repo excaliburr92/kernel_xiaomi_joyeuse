@@ -34,5 +34,5 @@ jobs:
       with:
         name: Kernel for Redmi Note 9 Pro
         allowUpdates: true
-        artifacts: ${{ steps.build.outputs.outfile }}
+        artifacts: "zipper/*.zip"
         token: ${{ secrets.GITHUB_TOKEN }}
