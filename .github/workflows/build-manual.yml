@@ -1,0 +1,37 @@
+name: Build and upload artifacts on tag create
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kernel source
+      uses: actions/checkout@v2
+
+    - name: Checkout zipper
+      uses: actions/checkout@v2
+      with:
+        repository: wolverine998/AnyKernel3
+        path: zipper
+
+    - name: Android kernel build
+      uses: lemniskett/android-kernel-actions@master
+      id: build
+      env:
+        NAME: xiaomi-kernel
+      with:
+        arch: arm64
+        #compiler: aosp-clang/master/clang-r433403
+        compiler: proton-clang/master/binutils
+        defconfig: joyeuse_defconfig
+        image: Image.gz-dtb
+
+    - name: Release build
+      uses: ncipollo/release-action@v1.8.9
+      with:
+        name: Kernel for Redmi Note 9 Pro
+        allowUpdates: true
+        artifacts: "zipper/*.zip, zipper/Image.gz-dtb"
+        token: ${{ secrets.GITHUB_TOKEN }}
