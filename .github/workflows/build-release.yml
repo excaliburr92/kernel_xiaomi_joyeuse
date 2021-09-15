@@ -1,4 +1,4 @@
-name: Build and upload artifacts on tag create
+name: [![Build and upload artifacts on tag create](https://github.com/wolverine998/kernel_xiaomi_joyeuse/actions/workflows/build-release.yml/badge.svg)](https://github.com/wolverine998/kernel_xiaomi_joyeuse/actions/workflows/build-release.yml)
 
 on:
   push:
