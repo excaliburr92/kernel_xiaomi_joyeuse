@@ -33,5 +33,5 @@ jobs:
       uses: ncipollo/release-action@v1.8.9
       with:
         name: "Xiaomi Kernel Joyeuse"
-        artifacts: ${{ steps.<step id>.outputs.outfile }}
+        artifacts: ${{ steps.build.outputs.outfile }}
         token: ${{ secrets.GITHUB_TOKEN }}
