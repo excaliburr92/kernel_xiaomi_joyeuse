@@ -24,7 +24,7 @@ jobs:
         NAME: xiaomi-kernel
       with:
         arch: arm64
-        compiler: aosp-clang/master/clang-r433403
+        compiler: proton-clang/master/binutils
         defconfig: joyeuse_defconfig
         image: Image.gz-dtb
 
