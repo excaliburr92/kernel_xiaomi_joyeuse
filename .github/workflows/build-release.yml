@@ -24,7 +24,7 @@ jobs:
         NAME: xiaomi-kernel
       with:
         arch: arm64
-        compiler: clang/11
+        compiler: gcc/10
         defconfig: joyeuse_defconfig
         image: Image.gz-dtb
 
