@@ -1,8 +1,8 @@
-name: Build and Release on tag create
+name: Kernel BUILD
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - 'main'
 
 jobs:
   build:
@@ -11,12 +11,6 @@ jobs:
     - name: Checkout kernel source
       uses: actions/checkout@v2
 
-    - name: Checkout zipper
-      uses: actions/checkout@v2
-      with:
-        repository: wolverine998/AnyKernel3
-        path: zipper
-
     - name: Android kernel build
       uses: lemniskett/android-kernel-actions@master
       id: build
@@ -24,14 +18,12 @@ jobs:
         NAME: xiaomi-kernel
       with:
         arch: arm64
-        compiler: proton-clang/master/binutils
-        defconfig: cust_joyeuse_defconfig
-        image: Image.gz-dtb
+        compiler: proton-clang/master
+        defconfig: joyeuse_defconfig
+        image: Image
 
-    - name: Release build
-      uses: ncipollo/release-action@v1.8.9
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2.2.4
       with:
-        name: Kernel for Redmi Note 9 Pro
-        allowUpdates: true
-        artifacts: "zipper/*.zip, zipper/Image.gz-dtb"
-        token: ${{ secrets.GITHUB_TOKEN }}
+        name: Kernel Image
+        path: /*
