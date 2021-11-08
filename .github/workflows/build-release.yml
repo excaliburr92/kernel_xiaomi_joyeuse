@@ -20,7 +20,7 @@ jobs:
         arch: arm64
         compiler: proton-clang/master
         defconfig: joyeuse_defconfig
-        image: Image
+        image: Image.gz
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2.2.4
